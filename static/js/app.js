@@ -5,7 +5,7 @@ const sendMessageToServer = async (userMessage, type) => {
 
   const sendMessage = async () => {
     try {
-      return await axios.get('http://localhost:7000/message/?message=' + userMessage + '&type=' + type)
+      return await axios.get('http://localhost:7000/message/?message=' + userMessage + '&type=' + type) // 
     } catch (error) {
       console.error(error)
     }

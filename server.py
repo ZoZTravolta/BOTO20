@@ -37,19 +37,23 @@ def index():
 @app.route("/message/", methods=['GET'])
 def get_message():
     user_message = request.args['message']
-    type = request.args['type']
+
+    if request.args.get('type'):
+        Mtype = request.args['type']
+    else:
+        Mtype = 'external'
     # user_message = request.get_json()
     # print(user_message)
-    if type == 'parrot':
+    if Mtype == 'parrot':
         return {"message": user_message, "anim": "dog.gif"}
 
-    if type == 'broken':
+    if Mtype == 'broken':
         return {"message": "I'm so broken! I'm so broken...", "anim": "heartbroke.gif"}
 
-    if type == 'drunk':
+    if Mtype == 'drunk':
         return {"message": drunk(), "anim": "dancing.gif"}
 
-    if type == 'trump':
+    if Mtype == 'trump':
         return {"message": trump(), "anim": "giggling.gif"}
 
     else:
