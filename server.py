@@ -42,8 +42,7 @@ def get_message():
         Mtype = request.args['type']
     else:
         Mtype = 'external'
-    # user_message = request.get_json()
-    # print(user_message)
+
     if Mtype == 'parrot':
         return {"message": user_message, "anim": "dog.gif"}
 
@@ -56,17 +55,18 @@ def get_message():
     if Mtype == 'trump':
         return {"message": trump(), "anim": "giggling.gif"}
 
+    if Mtype == 'external':
+        return {"message": "Hi from zohar's bot"}
+
     else:
-        return {"message": "Hi from zohar's bot", "anim": "confused.gif"}
+        return {"message": "Hello world", "anim": "confused.gif"}
 
 
 def drunk():
     connection = sqlite3.connect('botoBrain.db')
     curs = connection.cursor()
-
     curs.execute("SELECT * FROM drunk ORDER BY RANDOM() LIMIT 1")
     row = curs.fetchall()
-
     return row[0][1]
 
 
