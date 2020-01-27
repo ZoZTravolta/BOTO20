@@ -2,10 +2,11 @@
 
 
 const sendMessageToServer = async (userMessage, type) => {
-
+  const url = 'https://boto20.herokuapp.com/message/?message='
+  const url_local = 'http://localhost:7000/message/?message='
   const sendMessage = async () => {
     try {
-      return await axios.get('http://localhost:7000/message/?message=' + userMessage + '&type=' + type) // 
+      return await axios.get(url + userMessage + '&type=' + type) // 
     } catch (error) {
       console.error(error)
     }
