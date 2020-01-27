@@ -41,7 +41,7 @@ def get_message():
     if request.args.get('type'):
         Mtype = request.args['type']
     else:
-        Mtype = 'external'
+        Mtype = 'from_external'
 
     if Mtype == 'parrot':
         return {"message": user_message, "anim": "dog.gif"}
@@ -55,8 +55,11 @@ def get_message():
     if Mtype == 'trump':
         return {"message": trump(), "anim": "giggling.gif"}
 
-    if Mtype == 'external':
-        return {"message": "Hi from zohar's bot"}
+    if Mtype == 'external-bot':
+        return {"message": external_bot(user_message), "anim": "excited.gif"}
+
+    if Mtype == 'from_external':
+        return {"message": "This is the bot police! You are under arrest"}
 
     else:
         return {"message": "Hello world", "anim": "confused.gif"}
@@ -74,6 +77,12 @@ def trump():
     trumpQ = requests.get(
         'https://api.whatdoestrumpthink.com/api/v1/quotes/random').json()
     return trumpQ['message']
+
+
+def external_bot(user_message):
+    req = requests.get(
+        f"https://boto20.herokuapp.com/message/?message={user_message}").json()
+    return req['message']
 
 
 if __name__ == "__main__":
