@@ -6,7 +6,7 @@ const sendMessageToServer = async (userMessage, type) => {
   const url_local = 'http://localhost:7000/message/?message='
   const sendMessage = async () => {
     try {
-      return await axios.get(url + userMessage + '&type=' + type) // 
+      return await axios.get(url_local + userMessage + '&type=' + type) // 
     } catch (error) {
       console.error(error)
     }

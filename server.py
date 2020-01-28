@@ -43,6 +43,9 @@ def get_message():
     else:
         Mtype = 'from_external'
 
+    if Mtype == 'smart':
+        return {"message": smart_bot(user_message), "anim": "inlove.gif"}
+
     if Mtype == 'parrot':
         return {"message": user_message, "anim": "dog.gif"}
 
@@ -59,7 +62,7 @@ def get_message():
         return {"message": external_bot(user_message), "anim": "excited.gif"}
 
     if Mtype == 'from_external':
-        return {"message": "This is the bot police! You are under arrest"}
+        return {"message": "This is the bot police!! You are under arrest"}
 
     else:
         return {"message": "Hello world", "anim": "confused.gif"}
@@ -69,8 +72,8 @@ def drunk():
     connection = sqlite3.connect('botoBrain.db')
     curs = connection.cursor()
     curs.execute("SELECT * FROM drunk ORDER BY RANDOM() LIMIT 1")
-    row = curs.fetchall()
-    return row[0][1]
+    res = curs.fetchone()
+    return res[1]
 
 
 def trump():
@@ -81,8 +84,13 @@ def trump():
 
 def external_bot(user_message):
     req = requests.get(
-        f"https://boto20.herokuapp.com/message/?message={user_message}").json()
+        f"https://morning-basin-34003.herokuapp.com/message/?message={user_message}").json()
     return req['message']
+
+
+def smart_bot(user_message):
+
+    return 'hi'
 
 
 if __name__ == "__main__":
