@@ -31,7 +31,7 @@
                      aria-describedby="basic-addon2">
 
                   <select id="selectType">
-                     <option value="smart">Smart</option>
+                     <option value="todo">TODO</option>
                      <option value="parrot">Parrot</option>
                      <option value="broken">Broken record</option>
                      <option value="drunk">Drunk</option>
@@ -54,6 +54,11 @@
 
             <div class="response">
                <div id="responseText">
+                  {% if user_name:  %}
+                  hi, {{user_name}}
+                  {% else %}
+                  Hi, what's your name?
+                  {% endif %}
                   <!-- response of boto will be here -->
                </div>
             </div>

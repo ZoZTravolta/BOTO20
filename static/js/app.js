@@ -2,11 +2,22 @@
 
 
 const sendMessageToServer = async (userMessage, type) => {
-  const url = 'https://boto20.herokuapp.com/message/?message='
-  const url_local = 'http://localhost:7000/message/?message='
+  const url = 'https://boto20.herokuapp.com/message/?message=';
+  const url_local = 'http://localhost:7000/message/?message=';
+  const todoEndpoint = 'http://localhost:7000/todo/?message=';
+  document.getElementById('userInput').value = '';
+
   const sendMessage = async () => {
+    console.log(type)
     try {
-      return await axios.get(url_local + userMessage + '&type=' + type) // 
+      if (type == "todo") {
+        return await axios.get(todoEndpoint + userMessage)
+      }
+      else {
+        return await axios.get(url_local + userMessage + '&type=' + type) //
+      }
+
+
     } catch (error) {
       console.error(error)
     }
@@ -29,7 +40,13 @@ const sendMessageToServer = async (userMessage, type) => {
 document.getElementById('btnSubmit').addEventListener('click', () => {
   const userMessage = document.getElementById('userInput').value;
   const type = document.getElementById('selectType').value
-
   sendMessageToServer(userMessage, type)
 })
 
+document.getElementById('userInput').addEventListener('keyup', (e) => {
+  if (e.keyCode == 13) {
+    const userMessage = document.getElementById('userInput').value;
+    const type = document.getElementById('selectType').value
+    sendMessageToServer(userMessage, type)
+  }
+})
