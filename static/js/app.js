@@ -3,8 +3,10 @@
 
 const sendMessageToServer = async (userMessage, type) => {
   const url = 'https://boto20.herokuapp.com/message/?message=';
-  const url_local = 'http://localhost:7000/message/?message=';
-  const todoEndpoint = 'http://localhost:7000/todo/?message=';
+
+  const url_local = '/message/?message=';
+  const todoEndpoint = '/todo/?message=';
+
   document.getElementById('userInput').value = '';
 
   const sendMessage = async () => {
